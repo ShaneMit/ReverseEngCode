@@ -1,0 +1,18 @@
+Shane Mitchell
+06/02/20
+
+Reverse Engineering Code
+
+isAuthenticated.js is middleware that lets the user proceed if they they are logged in, but sends them back to the login page if they are not.
+
+passport.js is bringing in Passport which is an authentication middleware for Node.js. Passport is designed specifically to authenticate requests. This file checks if the username and password are correct and will notify the user if the email or password is incorrect. At the end of the file, Sequelize serializes and deserializes the user.
+
+The models folder serves to define the way the data is structured. Index.js is where Sequelize is brought in. Sequelize is a promise-based Node.js ORM to be used with MySQL. In user.js we use Sequelize and a constructor to define the shape that our data will take. This includes both the email and the password tables and the data included in them. This file is also using bcrypt which is used to hash, or encrypt, the password.
+
+The public folder contains everything on the frontend that will be seen by the user.  The login.html file is the code that makes up the elements for the page that the user logs in from and the login.js file takes the input that the user puts into the email and password field, checks to see if it is correct and sends the user to the “members” page. The members.html file has a div with the link to log out and a div with a header that uses members.js to populate with the member’s email address. The signup.html file contains the forms for the user to enter their information to sign up and link to log in if they have already signed up. Signup.js takes the user input from the email and password forms and makes sure they are not blank. If they are not blank, it runs the sign up function that puts their info in the database and sends them to the “members” page. The style.css file just adds a 50 pixel margin to the top of the signup and login forms.
+
+The api-routes.js file takes in the models and passport files. If the user has valid log in credentials, it sends them to the members page. There is also a route for signing up a user that takes their info, encrypts the password and sends the user to the members page. The last two routes in this file are for logging out the user and for returning data about the user (email and password). The html-routes.js file has the routes to take users to the “login”, “signup”, or “members” pages.
+
+The package.json holds metadata relating to the project, including the dependencies for the various npms like express, passport, and sequelize.
+
+The server.js contains the code for creating the server that the app runs on. It requires the necessary node packages and passport how we have configured it. It sets up the port and requires our models for the database then configures express and all of our middleware. Our routes are also required in there. Then finally we sync our database and logs a message to the user when it is successful.
